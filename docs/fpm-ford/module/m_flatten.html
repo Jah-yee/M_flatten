@@ -160,21 +160,22 @@
 
     <div class="col-md-9" id='text'>
       <h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code> M_flatten(3f) - [M_flatten::INTRO] Module for dealing with argument
+<div class="codehilite"><pre><span></span><code> flatten(3f) - [M_flatten::array] Module for dealing with argument
  rank mismatch
  (LICENSE:MIT)
 </code></pre></div>
 
 <h2 id="description">DESCRIPTION</h2>
-<p>Standard methods for passing arguments of different rank are suitable for
- many cases but when procedures have many arguments with independently
- variable ranks techniques such as generic procedures can require
- excessive duplication.</p>
-<p>The FLATTEN(3) procedure provided here can simply such interfaces
+<p>Standard methods for passing arguments of different rank are suitable
+ for many cases but when procedures have many arguments with independently
+ variable ranks techniques such as generic procedures can require excessive
+ duplication.</p>
+<p>The FLATTEN(3) procedure provided here can simplify such interfaces
  particularly when contiguous data is being passed.</p>
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>public methods:</p>
-<div class="codehilite"><pre><span></span><code>flatten    returns a rank one array pointer to a scalar or multi-dimensional array
+<div class="codehilite"><pre><span></span><code>flatten    returns a rank one array pointer to a scalar or
+           multi-dimensional array
 </code></pre></div>
 
 <h2 id="examples">EXAMPLES</h2>
@@ -185,36 +186,38 @@
 <span class="nx">integer</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">a</span>
 <span class="nx">integer</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">b0</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nx">b2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nx">b3</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="w">   </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">&#39;</span><span class="nx">WANTED</span><span class="p">:</span><span class="err">&#39;</span>
+<span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">first</span><span class="w"> </span><span class="nx">example</span>
+<span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">procedure</span><span class="w"> </span><span class="nx">called</span><span class="w"> </span><span class="nx">uses</span><span class="w"> </span><span class="nx">flatten</span><span class="w"> </span><span class="nx">so</span>
+<span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">callers</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">arbitrary</span><span class="w"> </span><span class="nx">rank</span>
+<span class="w">   </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">'</span><span class="nx">CALL</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="p">():</span><span class="err">'</span>
 <span class="w">   </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
-
-<span class="w">   </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">&#39;</span><span class="nx">WANTED1</span><span class="p">:</span><span class="err">&#39;</span>
+<span class="w">   </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">'</span><span class="nx">CALL</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="p">():</span><span class="err">'</span>
 <span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="nx">Alternatively</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">avoid</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">pointers</span><span class="w"> </span><span class="nx">directly</span>
 <span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="nx">write</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">called</span><span class="w"> </span><span class="nx">routine</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">expect</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">flattened</span>
 <span class="w">   </span><span class="p">!</span><span class="w"> </span><span class="nx">array</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">argument</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">flatten</span><span class="p">().</span>
 
 <span class="w">   </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
-<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
 <span class="nx">contains</span>
 
-<span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted1</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="nx">subroutine</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
 <span class="nx">integer</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">inout</span><span class="p">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">a</span>
 <span class="nx">integer</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span><span class="w">   </span><span class="o">::</span><span class="w"> </span><span class="nx">b</span><span class="p">(:)</span>
 <span class="nx">integer</span><span class="w">                </span><span class="o">::</span><span class="w"> </span><span class="nx">i</span>
@@ -222,9 +225,9 @@
 <span class="w">      </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">      </span><span class="nx">b</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
 <span class="w">   </span><span class="nx">enddo</span>
-<span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted1</span>
+<span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">caller_wraps_arguments</span>
 
-<span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="nx">subroutine</span><span class="w"> </span><span class="nx">callers_pass_anything</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
 <span class="p">!</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">technique</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">known</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">pointer</span><span class="w"> </span><span class="nx">rank</span><span class="w"> </span><span class="nx">remapping</span><span class="w"> </span><span class="p">(</span><span class="nx">introduced</span><span class="w"> </span><span class="k">in</span>
 <span class="p">!</span><span class="w"> </span><span class="nx">Fortran</span><span class="w"> </span><span class="mi">2003</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">expanded</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">Fortran</span><span class="w"> </span><span class="mi">2008</span><span class="p">).</span>
 <span class="p">!</span><span class="w"> </span><span class="nx">requires</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">multi</span><span class="o">-</span><span class="nx">dimensional</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">array</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">simply</span><span class="w"> </span><span class="nx">contiguous</span><span class="p">.</span>
@@ -237,22 +240,22 @@
 <span class="w">      </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">      </span><span class="nx">p_b</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
 <span class="w">   </span><span class="nx">enddo</span>
-<span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted</span>
+<span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">callers_pass_anything</span>
 
 <span class="nx">end</span><span class="w"> </span><span class="nx">program</span><span class="w"> </span><span class="nx">demo_M_flatten</span>
 </code></pre></div>
 
 <p>Results:</p>
-<div class="codehilite"><pre><span></span><code>&gt;  WANTED:
-&gt;  a=           1 b0=  1
-&gt;  a=           4 b1=  2    3       4
-&gt;  a=           8 b2=  5    6       7       8
-&gt;  a=          12 b3=  9   10      11      12
-&gt;  WANTED1:
-&gt;  a=           1 b0=  1
-&gt;  a=           4 b1=  2    3       4
-&gt;  a=           8 b2=  5    6       7       8
-&gt;  a=          12 b3=  9   10      11      12
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge"> callers_pass_anything:</span>
+<span class="k">&gt; </span><span class="ge"> a=           1 b0=  1</span>
+<span class="k">&gt; </span><span class="ge"> a=           4 b1=  2    3       4</span>
+<span class="k">&gt; </span><span class="ge"> a=           8 b2=  5    6       7       8</span>
+<span class="k">&gt; </span><span class="ge"> a=          12 b3=  9   10      11      12</span>
+<span class="k">&gt; </span><span class="ge"> caller_wraps_arguments:</span>
+<span class="k">&gt; </span><span class="ge"> a=           1 b0=  1</span>
+<span class="k">&gt; </span><span class="ge"> a=           4 b1=  2    3       4</span>
+<span class="k">&gt; </span><span class="ge"> a=           8 b2=  5    6       7       8</span>
+<span class="k">&gt; </span><span class="ge"> a=          12 b3=  9   10      11      12</span>
 </code></pre></div>
 
 <h2 id="details">DETAILS</h2>
@@ -265,7 +268,7 @@
 <p>To avoid using pointers directly write the called routine to expect a
  flattened array and pass the arguments with varying rank in a call to</p>
 <h2 id="flatten3">FLATTEN(3).</h2>
-<p>Note that the called procedure WANTED(3) will not know the original rank
+<p>Note that the called procedure will not know the original rank
  or shape unless it is passed, but will know the size of the input array.</p>
 <p>The argument to FLATTEN(3) should be a whole contiguous array. A
  slice or subsection would almost certainly just create and alter a
@@ -278,13 +281,13 @@
 
 <span class="w">      </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
 <span class="w">   </span><span class="nx">contains</span>
 
@@ -319,23 +322,23 @@
 
 <span class="w">      </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
 <span class="w">      </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">      </span><span class="nx">b4</span><span class="p">=</span><span class="o">-</span><span class="mi">99</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span><span class="p">(</span><span class="mi">2</span><span class="p">,:,:)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b4</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b4</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span>
 
 <span class="w">      </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">      </span><span class="nx">b4</span><span class="p">=</span><span class="o">-</span><span class="mi">99</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span><span class="p">(:,</span><span class="mi">2</span><span class="p">,:)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b4</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b4</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b4</span>
 
 <span class="w">   </span><span class="nx">contains</span>
 
@@ -416,13 +419,13 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
 
 <span class="w">   </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
 <span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
 <span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
 <span class="w">   </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
-<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">   </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
 <span class="nx">contains</span>
 
@@ -462,11 +465,11 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
 <span class="w">      </span><span class="nx">enddo</span>
 
 <span class="w">      </span><span class="nx">rank</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">assumed</span><span class="w"> </span><span class="nx">size</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">unsupported</span><span class="err">&#39;</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">assumed</span><span class="w"> </span><span class="nx">size</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">unsupported</span><span class="err">'</span>
 <span class="w">      </span><span class="nx">stop</span><span class="w"> </span><span class="mi">1</span>
 
 <span class="w">      </span><span class="nx">rank</span><span class="w"> </span><span class="k">default</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w">  </span><span class="err">&#39;</span><span class="nx">unsupported</span><span class="w"> </span><span class="nx">rank</span><span class="err">&#39;</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w">  </span><span class="err">'</span><span class="nx">unsupported</span><span class="w"> </span><span class="nx">rank</span><span class="err">'</span>
 <span class="w">      </span><span class="nx">stop</span><span class="w"> </span><span class="mi">2</span>
 
 <span class="w">   </span><span class="nx">end</span><span class="w"> </span><span class="nx">select</span>
@@ -517,13 +520,13 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
    external wanted</p>
 <div class="codehilite"><pre><span></span><code>  a=0
   call wanted ( a, b0 ,1)
-  print <span class="gs">*, &#39;a=&#39;, a, &#39;b0=&#39;, b0</span>
+  print <span class="gs">*, 'a=', a, 'b0=', b0</span>
 <span class="gs">  call wanted ( a, b1 ,size(b1))</span>
-<span class="gs">  print *</span>, &#39;a=&#39;, a, &#39;b0=&#39;, b1
+<span class="gs">  print *</span>, 'a=', a, 'b0=', b1
   call wanted ( a, b2 ,size(b2))
-  print <span class="gs">*, &#39;a=&#39;, a, &#39;b0=&#39;, b2</span>
+  print <span class="gs">*, 'a=', a, 'b0=', b2</span>
 <span class="gs">  call wanted ( a, b3 ,size(b3))</span>
-<span class="gs">  print *</span>, &#39;a=&#39;, a, &#39;b0=&#39;, b3
+<span class="gs">  print *</span>, 'a=', a, 'b0=', b3
 </code></pre></div>
 
 <p>contains</p>
@@ -570,10 +573,10 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
 <p>You might have to add a compiler-specific option depending on how much the
  compiler wants to prevent you from using sequence association.</p>
 <h2 id="alternative-ii">ALTERNATIVE II</h2>
-<p>USING EXPERIMENTAL PROPOSED METHOD</p>
+<p>USING PROPOSED METHOD</p>
 <p>Using GNU Fortran (GCC) 16.0.0 20250727 (experimental) and a compiler
- switch to allow using proposed features lets you try a proposed
- feature now that simplifies using assumed rank targets, eliminating
+ switch to allow using proposed features lets you try a method
+ that simplifies using assumed rank targets, eliminating
  the SELECT RANK requirement.</p>
 <p>By definition it is not certain this is how it will work in the next
  Fortran standard release.</p>
@@ -590,13 +593,13 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
 
 <span class="w">      </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b0</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b1</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b2</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
 <span class="w">      </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
-<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
+<span class="w">      </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">a</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="nx">b3</span><span class="p">=</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
 
 <span class="w">   </span><span class="nx">contains</span>
 
@@ -631,23 +634,28 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
  FLATTEN(3) is more appropriate:</p>
 <p>o elemental procedures
   o generic procedures
-  + assumed rank arrays and SELECT CASE.
+  o assumed rank arrays and SELECT CASE.
+  o use of EQUIVALENCE to alias a scalar to an array
+  o use of [scalar] to pass a scalar to an array when argument is INTENT(IN)
+  o use of ASSOCIATE to create a scalar name for an array element
   o You can create a flattened copy of the arrays and pass the temporary
     and then store it back into the original, which can be lot of overhead.
   o use of intrinsics such as TRANSFER(3), RESHAPE(3), PACK(3), UNPACK(3)
     are often useful when transferring data to variables with a different shape.
   o (legacy) sequence association.
-    Allowing argument rank mismatch was a de-facto standard behavior but never part of the standard
-    so you generally need a compiler option to allow legacy behavior even if using an assumed size
-    array. Probably should be avoided in new code.
+    Allowing argument rank mismatch was a de-facto standard behavior but
+    never part of the standard so you generally need a compiler option to
+    allow legacy behavior even if using an assumed size array. Probably
+    should be avoided in new code.
   o (proposed) pointer rank remapping to an assumed rank target
     available on some compilers as an experimental F202Y feature</p>
-<p>For most cases you do not have to do handle very many ranks or types and kinds, so
- generally the standard elemental, generic, and assume rank arrays are more reasonable
- as long as you do not fall into the trap of making an interface for every type and
- rank possible when there are only a few arguments. Where FLATTEN(3) is particularly
- useful is when there are many arguments on a procedure, with multiple arguments needing
- to support independent ranks.</p>
+<p>For most cases you do not have to handle very many ranks or types and
+ kinds, so generally the standard elemental, generic, and assumed rank
+ arrays are more reasonable as long as you do not fall into the trap of
+ making an interface for every type and rank possible when there are only
+ a few arguments. Where FLATTEN(3) is particularly useful is when there
+ are many arguments on a procedure, with multiple arguments needing to
+ support independent ranks.</p>
 <h2 id="author">AUTHOR</h2>
 <div class="codehilite"><pre><span></span><code> John S. Urban
 </code></pre></div>
@@ -688,151 +696,7 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
     private  function flatten_int32(arr) result(p_arr)  
 
     </h3>
-  <h2 id="name">NAME</h2>
-<div class="codehilite"><pre><span></span><code> flatten(3f) - [M_flatten::array] Module for dealing with argument
- rank mismatch
- (LICENSE:MIT)
-</code></pre></div>
-
-<h2 id="synopsis">SYNOPSIS</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">function</span><span class="w"> </span><span class="nf">flatten(a) result</span><span class="p">(</span>b<span class="p">)</span>
-
-<span class="w"> </span><span class="n">integer</span><span class="p">(</span><span class="n">kind</span><span class="p">=</span><span class="nb">int32</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">contiguous</span><span class="p">,</span><span class="n">target</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">a</span><span class="p">(..)</span>
-<span class="w"> </span>!<span class="w"> </span><span class="n">or</span>
-<span class="w"> </span><span class="n">integer</span><span class="p">(</span><span class="n">kind</span><span class="p">=</span><span class="nb">int64</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">contiguous</span><span class="p">,</span><span class="n">target</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">a</span><span class="p">(..)</span>
-<span class="w"> </span>!<span class="w"> </span><span class="n">or</span>
-<span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="n">kind</span><span class="p">=</span><span class="n">real32</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">contiguous</span><span class="p">,</span><span class="n">target</span><span class="w">   </span><span class="p">::</span><span class="w"> </span><span class="n">a</span><span class="p">(..)</span>
-<span class="w"> </span>!<span class="w"> </span><span class="n">or</span>
-<span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="n">kind</span><span class="p">=</span><span class="n">real64</span><span class="p">),</span><span class="n">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="n">contiguous</span><span class="p">,</span><span class="n">target</span><span class="w">   </span><span class="p">::</span><span class="w"> </span><span class="n">a</span><span class="p">(..)</span>
-
-<span class="w"> </span><span class="nb">type</span><span class="p">(</span><span class="n">TYPE</span><span class="p">,</span><span class="n">kind</span><span class="p">=</span><span class="n">KIND</span><span class="p">),</span><span class="n">pointer</span><span class="p">,</span><span class="n">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="p">::</span><span class="w"> </span><span class="n">b</span><span class="p">(:)</span>
-</code></pre></div>
-
-<h2 id="characteristics">CHARACTERISTICS</h2>
-<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">returned</span><span class="w"> </span><span class="nx">pointer</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">input</span>
-<span class="w"> </span><span class="nx">parameter</span><span class="w"> </span><span class="nx">A</span><span class="p">.</span>
-</code></pre></div>
-
-<h2 id="description">DESCRIPTION</h2>
-<p>FLATTEN(3) returns a rank one array pointer to a scalar or multi-dimensional
- array</p>
-<p>Standard methods for passing arguments of different rank are suitable for
- many cases but when procedures have many arguments with independently
- variable ranks techniques such as generic procedures can require excessive
- duplication.</p>
-<p>The FLATTEN(3) procedure provided here can simply such interfaces
- particularly when contiguous data is being passed.</p>
-<p>The M_flatten module provides the procedure FLATTEN(3) which
- provides a function that returns a rank one array pointer which points
- to a scalar or an array of any shape.</p>
-<p>The FLATTEN(3) procedure generically allows for multi-dimensional
- arrays to be accessed as flattened arrays efficiently without having to
- copy the data to and from other shapes.</p>
-<p>Consider other methods carefully to decide on whether an alternative to
- FLATTEN(3) is more appropriate:</p>
-<p>o elemental procedures
-  o generic procedures
-  o assumed rank arrays and SELECT CASE.
-  o You can create a flattened copy of the arrays and pass the temporary
-    and then store it back into the original, which can be lot of overhead.
-  o use of intrinsics such as TRANSFER(3), RESHAPE(3), PACK(3),
-    UNPACK(3) are often useful when transfering data to variables with
-    a different shape.
-  o (legacy) sequence association. Allowing argument rank mismatch was
-    a de-facto standard behavior but never part of the standard
-    so you generally need a compiler option to allow legacy behavior even
-    if using an assumed size array. Probably should be avoided in new code.
-  o (proposed) pointer rank remapping to an assumed rank target
-    available on some compilers as an experimental F202Y feature</p>
-<p>For most cases you do not have to do handle very many ranks or types
- and kinds, so generally the standard elemental, generic, and assume rank
- arrays are more reasonable as long as you do not fall into the trap of
- making an interface for every type and rank possible when there are
- only a few arguments. Where FLATTEN(3) is particularly useful is
- when there are many arguments on a procedure, with multiple arguments
- needing to support independent ranks.</p>
-<h2 id="examples">EXAMPLES</h2>
-<p>Sample program:</p>
-<div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="nx">program</span><span class="w"> </span><span class="nx">demo_flatten</span>
-<span class="w">  </span><span class="nx">use</span><span class="w"> </span><span class="nx">M_flatten</span><span class="p">,</span><span class="w"> </span><span class="nx">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">flatten</span>
-<span class="w">  </span><span class="nx">implicit</span><span class="w"> </span><span class="nx">none</span>
-<span class="w">  </span><span class="nx">integer</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">a</span>
-<span class="w">  </span><span class="nx">integer</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">b0</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nx">b2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nx">b3</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">     </span><span class="p">!</span>
-<span class="w">     </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">&#39;</span><span class="nx">WANTED</span><span class="p">:</span><span class="err">&#39;</span>
-<span class="w">     </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
-<span class="w">     </span><span class="p">!</span>
-<span class="w">     </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="err">&#39;</span><span class="nx">WANTED1</span><span class="p">:</span><span class="err">&#39;</span>
-<span class="w">     </span><span class="p">!</span><span class="w"> </span><span class="nx">Alternatively</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">avoid</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">pointers</span><span class="w"> </span><span class="nx">directly</span>
-<span class="w">     </span><span class="p">!</span><span class="w"> </span><span class="nx">write</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">called</span><span class="w"> </span><span class="nx">routine</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">expect</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">flattened</span>
-<span class="w">     </span><span class="p">!</span><span class="w"> </span><span class="nx">array</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">argument</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">flatten</span><span class="p">().</span>
-<span class="w">     </span><span class="p">!</span>
-<span class="w">     </span><span class="nx">a</span><span class="p">=</span><span class="mi">0</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b0</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b0</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b1</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b1</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b2</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b2</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b2</span>
-<span class="w">     </span><span class="nx">call</span><span class="w"> </span><span class="nx">wanted1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b3</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="w">     </span><span class="nx">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">a</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">b3</span><span class="p">=</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">b3</span>
-<span class="w">  </span><span class="nx">contains</span>
-<span class="w">  </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted1</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
-<span class="w">  </span><span class="nx">integer</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">inout</span><span class="p">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">a</span>
-<span class="w">  </span><span class="nx">integer</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span><span class="w">   </span><span class="o">::</span><span class="w"> </span><span class="nx">b</span><span class="p">(:)</span>
-<span class="w">  </span><span class="nx">integer</span><span class="w">                </span><span class="o">::</span><span class="w"> </span><span class="nx">i</span>
-<span class="w">     </span><span class="nx">do</span><span class="w"> </span><span class="nx">i</span><span class="p">=</span><span class="mi">1</span><span class="p">,</span><span class="nx">size</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="nx">b</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
-<span class="w">     </span><span class="nx">enddo</span>
-<span class="w">  </span><span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted1</span>
-<span class="w">  </span><span class="p">!</span>
-<span class="w">  </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted</span><span class="p">(</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
-<span class="w">  </span><span class="p">!</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">technique</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">known</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">pointer</span><span class="w"> </span><span class="nx">rank</span><span class="w"> </span><span class="nx">remapping</span><span class="w"> </span><span class="p">(</span><span class="nx">introduced</span><span class="w"> </span><span class="k">in</span>
-<span class="w">  </span><span class="p">!</span><span class="w"> </span><span class="nx">Fortran</span><span class="w"> </span><span class="mi">2003</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">expanded</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">Fortran</span><span class="w"> </span><span class="mi">2008</span><span class="p">).</span>
-<span class="w">  </span><span class="p">!</span><span class="w"> </span><span class="nx">requires</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">multi</span><span class="o">-</span><span class="nx">dimensional</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">array</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">simply</span><span class="w"> </span><span class="nx">contiguous</span><span class="p">.</span>
-<span class="w">  </span><span class="nx">integer</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">inout</span><span class="p">)</span><span class="w">                  </span><span class="o">::</span><span class="w"> </span><span class="nx">a</span>
-<span class="w">  </span><span class="nx">integer</span><span class="p">,</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">contiguous</span><span class="p">,</span><span class="w"> </span><span class="nx">intent</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">b</span><span class="p">(..)</span>
-<span class="w">  </span><span class="nx">integer</span><span class="w">                                 </span><span class="o">::</span><span class="w"> </span><span class="nx">i</span>
-<span class="w">  </span><span class="nx">integer</span><span class="p">,</span><span class="nx">pointer</span><span class="w">                         </span><span class="o">::</span><span class="w"> </span><span class="nx">p_b</span><span class="p">(:)</span>
-<span class="w">     </span><span class="nx">p_b</span><span class="o">=&gt;</span><span class="nx">flatten</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-<span class="w">     </span><span class="nx">do</span><span class="w"> </span><span class="nx">i</span><span class="p">=</span><span class="mi">1</span><span class="p">,</span><span class="nx">size</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="nx">p_b</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
-<span class="w">     </span><span class="nx">enddo</span>
-<span class="w">  </span><span class="nx">end</span><span class="w"> </span><span class="nx">subroutine</span><span class="w"> </span><span class="nx">wanted</span>
-<span class="w">  </span><span class="p">!</span>
-<span class="w">  </span><span class="nx">end</span><span class="w"> </span><span class="nx">program</span><span class="w"> </span><span class="nx">demo_flatten</span>
-</code></pre></div>
-
-<p>Results:</p>
-<div class="codehilite"><pre><span></span><code>&gt;  WANTED:
-&gt;  a=           1 b0=  1
-&gt;  a=           4 b1=  2    3       4
-&gt;  a=           8 b2=  5    6       7       8
-&gt;  a=          12 b3=  9   10      11      12
-&gt;  WANTED1:
-&gt;  a=           1 b0=  1
-&gt;  a=           4 b1=  2    3       4
-&gt;  a=           8 b2=  5    6       7       8
-&gt;  a=          12 b3=  9   10      11      12
-</code></pre></div>
-
-<h2 id="author">AUTHOR</h2>
-<div class="codehilite"><pre><span></span><code> John S. Urban
-</code></pre></div>
-
-<h2 id="license">LICENSE</h2>
-<div class="codehilite"><pre><span></span><code> MIT
-</code></pre></div>
+  
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -1029,7 +893,7 @@ a=  4   b4=  -99  -99    1    2   -99  -99    3  4
             <p class="text-end">
               Documentation generated by
               <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2026-07-03 00:01 +0000             </p>
+ on 2026-09-16 04:45 +0000             </p>
           </div>
         </div>
         <br>
