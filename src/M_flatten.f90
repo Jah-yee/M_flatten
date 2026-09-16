@@ -3,18 +3,18 @@
 !===================================================================================================================================
 !>
 !!##NAME
-!!     M_flatten(3f) - [M_flatten::INTRO] Module for dealing with argument
+!!     flatten(3f) - [M_flatten::array] Module for dealing with argument
 !!     rank mismatch
 !!     (LICENSE:MIT)
 !!
 !!##DESCRIPTION
 !!
-!! Standard methods for passing arguments of different rank are suitable for
-!! many cases but when procedures have many arguments with independently
-!! variable ranks techniques such as generic procedures can require
-!! excessive duplication.
+!! Standard methods for passing arguments of different rank are suitable
+!! for many cases but when procedures have many arguments with independently
+!! variable ranks techniques such as generic procedures can require excessive
+!! duplication.
 !!
-!! The FLATTEN(3) procedure provided here can simply such interfaces
+!! The FLATTEN(3) procedure provided here can simplify such interfaces
 !! particularly when contiguous data is being passed.
 !!
 !!##SYNOPSIS
@@ -22,7 +22,8 @@
 !!
 !!   public methods:
 !!
-!!    flatten    returns a rank one array pointer to a scalar or multi-dimensional array
+!!    flatten    returns a rank one array pointer to a scalar or
+!!               multi-dimensional array
 !!
 !!##EXAMPLES
 !!
@@ -35,36 +36,38 @@
 !!    integer :: a
 !!    integer :: b0, b1(-1:1), b2(2,2), b3(2,2,1)
 !!
-!!       write(*,*)'WANTED:'
+!!       ! in the first example
+!!       ! the procedure called uses flatten so
+!!       ! the callers can use any arbitrary rank
+!!       write(*,*)'CALL callers_pass_anything():'
 !!       a=0
-!!       call wanted ( a, b0 )
+!!       call callers_pass_anything ( a, b0 )
 !!       print *, 'a=', a, 'b0=', b0
-!!       call wanted ( a, b1 )
+!!       call callers_pass_anything ( a, b1 )
 !!       print *, 'a=', a, 'b1=', b1
-!!       call wanted ( a, b2 )
+!!       call callers_pass_anything ( a, b2 )
 !!       print *, 'a=', a, 'b2=', b2
-!!       call wanted ( a, b3 )
+!!       call callers_pass_anything ( a, b3 )
 !!       print *, 'a=', a, 'b3=', b3
 !!
-!!
-!!       write(*,*)'WANTED1:'
+!!       write(*,*)'CALL caller_wraps_arguments():'
 !!       ! Alternatively, to avoid using pointers directly
 !!       ! write the called routine to expect a flattened
 !!       ! array and call the argument with flatten().
 !!
 !!       a=0
-!!       call wanted1 ( a, flatten(b0) )
+!!       call caller_wraps_arguments ( a, flatten(b0) )
 !!       print *, 'a=', a, 'b0=', b0
-!!       call wanted1 ( a, flatten(b1) )
+!!       call caller_wraps_arguments ( a, flatten(b1) )
 !!       print *, 'a=', a, 'b1=', b1
-!!       call wanted1 ( a, flatten(b2) )
+!!       call caller_wraps_arguments ( a, flatten(b2) )
 !!       print *, 'a=', a, 'b2=', b2
-!!       call wanted1 ( a, flatten(b3) )
+!!       call caller_wraps_arguments ( a, flatten(b3) )
 !!       print *, 'a=', a, 'b3=', b3
 !!
 !!    contains
 !!
-!!    subroutine wanted1( a, b)
+!!    subroutine caller_wraps_arguments( a, b)
 !!    integer, intent(inout) :: a
 !!    integer, intent(out)   :: b(:)
 !!    integer                :: i
@@ -72,9 +75,9 @@
 !!          a = a + 1
 !!          b(i) = a
 !!       enddo
-!!    end subroutine wanted1
+!!    end subroutine caller_wraps_arguments
 !!
-!!    subroutine wanted( a, b)
+!!    subroutine callers_pass_anything( a, b)
 !!    ! This technique is known as pointer rank remapping (introduced in
 !!    ! Fortran 2003 and expanded in Fortran 2008).
 !!    ! requires the multi-dimensional target array is simply contiguous.
@@ -87,18 +90,18 @@
 !!          a = a + 1
 !!          p_b(i) = a
 !!       enddo
-!!    end subroutine wanted
+!!    end subroutine callers_pass_anything
 !!
 !!    end program demo_M_flatten
 !!
 !!   Results:
 !!
-!!    >  WANTED:
+!!    >  callers_pass_anything:
 !!    >  a=           1 b0=  1
 !!    >  a=           4 b1=  2    3       4
 !!    >  a=           8 b2=  5    6       7       8
 !!    >  a=          12 b3=  9   10      11      12
-!!    >  WANTED1:
+!!    >  caller_wraps_arguments:
 !!    >  a=           1 b0=  1
 !!    >  a=           4 b1=  2    3       4
 !!    >  a=           8 b2=  5    6       7       8
@@ -116,7 +119,7 @@
 !! flattened array and pass the arguments with varying rank in a call to
 !!##FLATTEN(3).
 !!
-!! Note that the called procedure WANTED(3) will not know the original rank
+!! Note that the called procedure will not know the original rank
 !! or shape unless it is passed, but will know the size of the input array.
 !!
 !! The argument to FLATTEN(3) should be a whole contiguous array. A
@@ -443,11 +446,11 @@
 !!
 !!##ALTERNATIVE II
 !!
-!!  USING EXPERIMENTAL PROPOSED METHOD
+!!  USING PROPOSED METHOD
 !!
 !! Using GNU Fortran (GCC) 16.0.0 20250727 (experimental) and a compiler
-!! switch to allow using proposed features lets you try a proposed
-!! feature now that simplifies using assumed rank targets, eliminating
+!! switch to allow using proposed features lets you try a method
+!! that simplifies using assumed rank targets, eliminating
 !! the SELECT RANK requirement.
 !!
 !! By definition it is not certain this is how it will work in the next
@@ -510,24 +513,29 @@
 !!
 !!  o elemental procedures
 !!  o generic procedures
-!!  + assumed rank arrays and SELECT CASE.
+!!  o assumed rank arrays and SELECT CASE.
+!!  o use of EQUIVALENCE to alias a scalar to an array
+!!  o use of [scalar] to pass a scalar to an array when argument is INTENT(IN)
+!!  o use of ASSOCIATE to create a scalar name for an array element
 !!  o You can create a flattened copy of the arrays and pass the temporary
 !!    and then store it back into the original, which can be lot of overhead.
 !!  o use of intrinsics such as TRANSFER(3), RESHAPE(3), PACK(3), UNPACK(3)
 !!    are often useful when transferring data to variables with a different shape.
 !!  o (legacy) sequence association.
-!!    Allowing argument rank mismatch was a de-facto standard behavior but never part of the standard
-!!    so you generally need a compiler option to allow legacy behavior even if using an assumed size
-!!    array. Probably should be avoided in new code.
+!!    Allowing argument rank mismatch was a de-facto standard behavior but
+!!    never part of the standard so you generally need a compiler option to
+!!    allow legacy behavior even if using an assumed size array. Probably
+!!    should be avoided in new code.
 !!  o (proposed) pointer rank remapping to an assumed rank target
 !!    available on some compilers as an experimental F202Y feature
 !!
-!! For most cases you do not have to do handle very many ranks or types and kinds, so
-!! generally the standard elemental, generic, and assume rank arrays are more reasonable
-!! as long as you do not fall into the trap of making an interface for every type and
-!! rank possible when there are only a few arguments. Where FLATTEN(3) is particularly
-!! useful is when there are many arguments on a procedure, with multiple arguments needing
-!! to support independent ranks.
+!! For most cases you do not have to handle very many ranks or types and
+!! kinds, so generally the standard elemental, generic, and assumed rank
+!! arrays are more reasonable as long as you do not fall into the trap of
+!! making an interface for every type and rank possible when there are only
+!! a few arguments. Where FLATTEN(3) is particularly useful is when there
+!! are many arguments on a procedure, with multiple arguments needing to
+!! support independent ranks.
 !!
 !!##AUTHOR
 !!     John S. Urban
@@ -548,167 +556,9 @@ interface flatten
    module procedure flatten_real64
 end interface flatten
 contains
-
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
 !===================================================================================================================================
-!>
-!!##NAME
-!!     flatten(3f) - [M_flatten::array] Module for dealing with argument
-!!     rank mismatch
-!!     (LICENSE:MIT)
-!!
-!!##SYNOPSIS
-!!
-!!
-!!    function flatten(a) result(b)
-!!
-!!     integer(kind=int32),intent(in),contiguous,target :: a(..)
-!!     ! or
-!!     integer(kind=int64),intent(in),contiguous,target :: a(..)
-!!     ! or
-!!     real(kind=real32),intent(in),contiguous,target   :: a(..)
-!!     ! or
-!!     real(kind=real64),intent(in),contiguous,target   :: a(..)
-!!
-!!     type(TYPE,kind=KIND),pointer,intent(out) :: b(:)
-!!
-!!##CHARACTERISTICS
-!!
-!!     The type of the returned pointer is the same type as the input
-!!     parameter A.
-!!
-!!
-!!##DESCRIPTION
-!!
-!! FLATTEN(3) returns a rank one array pointer to a scalar or multi-dimensional
-!! array
-!!
-!! Standard methods for passing arguments of different rank are suitable for
-!! many cases but when procedures have many arguments with independently
-!! variable ranks techniques such as generic procedures can require excessive
-!! duplication.
-!!
-!! The FLATTEN(3) procedure provided here can simply such interfaces
-!! particularly when contiguous data is being passed.
-!!
-!! The M_flatten module provides the procedure FLATTEN(3) which
-!! provides a function that returns a rank one array pointer which points
-!! to a scalar or an array of any shape.
-!!
-!! The FLATTEN(3) procedure generically allows for multi-dimensional
-!! arrays to be accessed as flattened arrays efficiently without having to
-!! copy the data to and from other shapes.
-!!
-!! Consider other methods carefully to decide on whether an alternative to
-!! FLATTEN(3) is more appropriate:
-!!
-!!  o elemental procedures
-!!  o generic procedures
-!!  o assumed rank arrays and SELECT CASE.
-!!  o You can create a flattened copy of the arrays and pass the temporary
-!!    and then store it back into the original, which can be lot of overhead.
-!!  o use of intrinsics such as TRANSFER(3), RESHAPE(3), PACK(3),
-!!    UNPACK(3) are often useful when transfering data to variables with
-!!    a different shape.
-!!  o (legacy) sequence association. Allowing argument rank mismatch was
-!!    a de-facto standard behavior but never part of the standard
-!!    so you generally need a compiler option to allow legacy behavior even
-!!    if using an assumed size array. Probably should be avoided in new code.
-!!  o (proposed) pointer rank remapping to an assumed rank target
-!!    available on some compilers as an experimental F202Y feature
-!!
-!! For most cases you do not have to do handle very many ranks or types
-!! and kinds, so generally the standard elemental, generic, and assume rank
-!! arrays are more reasonable as long as you do not fall into the trap of
-!! making an interface for every type and rank possible when there are
-!! only a few arguments. Where FLATTEN(3) is particularly useful is
-!! when there are many arguments on a procedure, with multiple arguments
-!! needing to support independent ranks.
-!!
-!!
-!!##EXAMPLES
-!!
-!!
-!!  Sample program:
-!!
-!!      program demo_flatten
-!!      use M_flatten, only : flatten
-!!      implicit none
-!!      integer :: a
-!!      integer :: b0, b1(-1:1), b2(2,2), b3(2,2,1)
-!!         !
-!!         write(*,*)'WANTED:'
-!!         a=0
-!!         call wanted ( a, b0 )
-!!         print *, 'a=', a, 'b0=', b0
-!!         call wanted ( a, b1 )
-!!         print *, 'a=', a, 'b1=', b1
-!!         call wanted ( a, b2 )
-!!         print *, 'a=', a, 'b2=', b2
-!!         call wanted ( a, b3 )
-!!         print *, 'a=', a, 'b3=', b3
-!!         !
-!!         write(*,*)'WANTED1:'
-!!         ! Alternatively, to avoid using pointers directly
-!!         ! write the called routine to expect a flattened
-!!         ! array and call the argument with flatten().
-!!         !
-!!         a=0
-!!         call wanted1 ( a, flatten(b0) )
-!!         print *, 'a=', a, 'b0=', b0
-!!         call wanted1 ( a, flatten(b1) )
-!!         print *, 'a=', a, 'b1=', b1
-!!         call wanted1 ( a, flatten(b2) )
-!!         print *, 'a=', a, 'b2=', b2
-!!         call wanted1 ( a, flatten(b3) )
-!!         print *, 'a=', a, 'b3=', b3
-!!      contains
-!!      subroutine wanted1( a, b)
-!!      integer, intent(inout) :: a
-!!      integer, intent(out)   :: b(:)
-!!      integer                :: i
-!!         do i=1,size(b)
-!!            a = a + 1
-!!            b(i) = a
-!!         enddo
-!!      end subroutine wanted1
-!!      !
-!!      subroutine wanted( a, b)
-!!      ! This technique is known as pointer rank remapping (introduced in
-!!      ! Fortran 2003 and expanded in Fortran 2008).
-!!      ! requires the multi-dimensional target array is simply contiguous.
-!!      integer, intent(inout)                  :: a
-!!      integer,target, contiguous, intent(out) :: b(..)
-!!      integer                                 :: i
-!!      integer,pointer                         :: p_b(:)
-!!         p_b=>flatten(b)
-!!         do i=1,size(b)
-!!            a = a + 1
-!!            p_b(i) = a
-!!         enddo
-!!      end subroutine wanted
-!!      !
-!!      end program demo_flatten
-!!
-!!   Results:
-!!
-!!    >  WANTED:
-!!    >  a=           1 b0=  1
-!!    >  a=           4 b1=  2    3       4
-!!    >  a=           8 b2=  5    6       7       8
-!!    >  a=          12 b3=  9   10      11      12
-!!    >  WANTED1:
-!!    >  a=           1 b0=  1
-!!    >  a=           4 b1=  2    3       4
-!!    >  a=           8 b2=  5    6       7       8
-!!    >  a=          12 b3=  9   10      11      12
-!!
-!!##AUTHOR
-!!     John S. Urban
-!!
-!!##LICENSE
-!!     MIT
 function flatten_int32(arr) result(p_arr)
 use, intrinsic :: iso_c_binding
 integer(kind=int32),target, contiguous :: arr(..)
